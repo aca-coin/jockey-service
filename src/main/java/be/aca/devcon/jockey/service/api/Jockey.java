@@ -8,6 +8,7 @@ public class Jockey {
 	private String name;
 	private String horse;
 	private String teamName;
+	private String portraitUrl;
 
 	public long getId() {
 		return id;
@@ -39,6 +40,14 @@ public class Jockey {
 
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
+	}
+
+	public String getPortraitUrl() {
+		return portraitUrl;
+	}
+
+	public void setPortraitUrl(String portraitUrl) {
+		this.portraitUrl = portraitUrl;
 	}
 
 	@Override

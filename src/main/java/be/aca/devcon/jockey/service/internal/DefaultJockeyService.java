@@ -9,6 +9,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.Team;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.model.UserConstants;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.TeamLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -51,6 +52,15 @@ public class DefaultJockeyService implements JockeyService {
 		return getJockeys(teamName, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	public Jockey getJockey(int id) {
+		try {
+			return toJockey(userLocalService.getUser(id));
+		} catch (PortalException e) {
+			LOGGER.error(e);
+			return null;
+		}
+	}
+
 	public int getJockeysCount(String teamName) {
 		try {
 			if (teamName == null) {
@@ -88,8 +98,18 @@ public class DefaultJockeyService implements JockeyService {
 		jockey.setName(user.getFullName());
 		jockey.setHorse((String) user.getExpandoBridge().getAttribute("Horse", false));
 		jockey.setTeamName(user.getTeams().isEmpty() ? null : user.getTeams().get(0).getName());
+		jockey.setPortraitUrl(UserConstants.getPortraitURL("/image", isUserMale(user), user.getPortraitId(), user.getUserUuid()));
 
 		return jockey;
+	}
+
+	private boolean isUserMale(User user) {
+		try {
+			return user.isMale();
+		} catch (PortalException e) {
+			LOGGER.error(e);
+			return true;
+		}
 	}
 
 	private long getTeamId(long groupId, String teamName) throws PortalException {

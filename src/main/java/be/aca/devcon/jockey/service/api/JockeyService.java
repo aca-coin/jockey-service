@@ -17,6 +17,12 @@ public interface JockeyService {
 	List<Jockey> getJockeys(String teamName);
 
 	/**
+	 * Finds the jockey with the specified id.
+	 * Returns null if the jockey cannot be found.
+	 */
+	Jockey getJockey(int id);
+
+	/**
 	 * Find all teams in the Guest site.
 	 */
 	List<String> getTeams();
