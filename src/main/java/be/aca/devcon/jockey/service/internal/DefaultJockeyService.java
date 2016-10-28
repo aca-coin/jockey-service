@@ -52,7 +52,7 @@ public class DefaultJockeyService implements JockeyService {
 		return getJockeys(teamName, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public Jockey getJockey(int id) {
+	public Jockey getJockey(long id) {
 		try {
 			return toJockey(userLocalService.getUser(id));
 		} catch (PortalException e) {

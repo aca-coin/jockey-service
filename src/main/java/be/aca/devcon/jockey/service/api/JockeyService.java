@@ -20,7 +20,7 @@ public interface JockeyService {
 	 * Finds the jockey with the specified id.
 	 * Returns null if the jockey cannot be found.
 	 */
-	Jockey getJockey(int id);
+	Jockey getJockey(long id);
 
 	/**
 	 * Find all teams in the Guest site.
